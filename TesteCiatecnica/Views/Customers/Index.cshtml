@@ -1,0 +1,106 @@
+﻿@using TesteCiatecnica.Models.Entities
+
+@model IEnumerable<TesteCiatecnica.Models.Entities.Customer>
+
+@{
+    ViewData["Title"] = "Lista de Clientes";
+}
+
+<h1>Lista de clientes</h1>
+
+<p>
+    <button data-action="addCustomer" class="btn" data-toggle="tooltip" data-placement="top" title="Novo Cliente"><i class="fas fa-plus"></i></button>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>CPF / CNPJ</th>
+            <th>Nome / Razão Social</th>
+            <th>Sobrenome / Nome Fantasia</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="customers-list-content">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.SSNorEIN)</td>
+                <td>@Html.DisplayFor(modelItem => item.NameOrCompanyName)</td>
+                <td>@Html.DisplayFor(modelItem => item.LastNameOrTradingName)</td>
+                <td>
+                    <button data-action="editCustomer" data-id="@Html.Raw(item.CustomerId)" class="btn" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-pencil-alt"></i></button>
+                    <button data-action="detailCustomer" data-id="@Html.Raw(item.CustomerId)" class="btn" data-toggle="tooltip" data-placement="top" title="Detalhes"><i class="fa fa-list"></i></button>
+                    <button data-action="deleteCustomer" data-id="@Html.Raw(item.CustomerId)" class="btn" data-toggle="tooltip" data-placement="top" title="Excluir"><i class="fa fa-trash"></i></button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="modalCustomer" class="modal modalCustomer" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cadastrar novo cliente</h5>
+                <button type="button" class="close" onclick="$('#modalCustomer').fadeOut()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @await Html.PartialAsync("_FrmCustomer.cshtml", new Customer())
+            </div>
+            <div class="modal-footer">
+                <button id="btnSaveCustomer" type="button" class="btn btn-primary">Salvar</button>
+                <button type="button" class="btn btn-secondary" onclick="$('#modalCustomer').fadeOut()">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalDetailsCustomer" class="modal modalDetailsCustomer" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detalhes do cliente</h5>
+                <button type="button" class="close" onclick="$('#modalDetailsCustomer').fadeOut()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <dl class="dl-horizontal details-customer-content"></dl>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"  onclick="$('#modalDetailsCustomer').fadeOut()">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalDeleteCustomer" class="modal modalDeleteCustomer" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detalhes do cliente</h5>
+                <button type="button" class="close" onclick="$('#modalDeleteCustomer').fadeOut()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja excluir esse cliente?
+            </div>
+            <div class="modal-footer">
+                <button id="btnConfirmDeleteCustomer" type="button" class="btn btn-primary" data-dismiss="modal">Confirmar</button>
+                <button type="button" class="btn btn-secondary"  onclick="$('#modalDeleteCustomer').fadeOut()">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

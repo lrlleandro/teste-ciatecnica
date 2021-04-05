@@ -1,0 +1,50 @@
+﻿@model TesteCiatecnica.Models.Entities.Address
+    <input id="AddressId" name="AddressId" asp-for="AddressId" type="hidden" />
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="ZipCode" class="control-label">CEP</label>
+                <input id="ZipCode" asp-for="ZipCode" class="form-control cep" />
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="form-group">
+                <label asp-for="Street" class="control-label">Logradouro</label>
+                <input id="Street" asp-for="Street" tabindex="-1" class="form-control" readonly/>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="Number" class="control-label">Número</label>
+                <input asp-for="Number" class="form-control"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label asp-for="Complement" class="control-label">Complemento</label>
+                <input id="Complement" asp-for="Complement" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label asp-for="Neighborhood" class="control-label">Bairro</label>
+                <input id="Neighborhood" asp-for="Neighborhood" tabindex="-1" class="form-control" readonly/>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label asp-for="City" class="control-label">Cidade</label>
+                <input id="City" asp-for="City" tabindex="-1" class="form-control" readonly/>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="State" class="control-label">UF</label>
+                <input id="State" asp-for="State" tabindex="-1" class="form-control" readonly/>
+            </div>
+        </div>
+    </div>

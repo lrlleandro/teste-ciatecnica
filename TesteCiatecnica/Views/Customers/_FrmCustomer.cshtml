@@ -1,0 +1,56 @@
+﻿@using TesteCiatecnica.Models.Entities
+
+@model TesteCiatecnica.Models.Entities.Customer
+
+<div class="row">
+    <div class="col-md-12">
+        <form id="frmCustomer">
+            <input id="CustomerId" name="CustomerId" asp-for="CustomerId" type="hidden" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Tipo de Cliente</label>
+                        <select id="slcCustomerType" class="form-control" asp-for="CustomerType">
+                            <option value="@Html.Raw(TesteCiatecnica.Models.Enums.CustomerTypes.PhysicalPerson)">Pessoa Física</option>
+                            <option value="@Html.Raw(TesteCiatecnica.Models.Enums.CustomerTypes.LegalPerson)">Pessoa Jurídica</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="SSNorEIN" class="control-label"></label>
+                        <input id="SSNorEIN" name="SSNorEIN" asp-for="SSNorEIN" class="form-control cpf" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="NameOrCompanyName" class="control-label"></label>
+                        <input id="NameOrCompanyName" name="NameOrCompanyName" asp-for="NameOrCompanyName" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="LastNameOrTradingName" class="control-label"></label>
+                        <input id="LastNameOrTradingName" name="LastNameOrTradingName" asp-for="LastNameOrTradingName" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-4" id="birthdate-container">
+                    <div class="form-group">
+                        <label asp-for="BirthDate" class="control-label"></label>
+                        <input type="text" id="BirthDate" name="BirthDate" asp-for="BirthDate" class="form-control date" />
+                    </div>
+                </div>
+            </div>
+            @await Html.PartialAsync("_FormAddress.cshtml", new Address())
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
